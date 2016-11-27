@@ -1,0 +1,20 @@
+---
+- name: debian | installing pre requisites
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-software-properties
+
+- name: debian | adding juju ppa repo
+  apt_repository:
+    repo: "{{ juju_repo }}"
+    state: present
+
+- name: debian | installing juju packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - juju
+    - charm-tools
